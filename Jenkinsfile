@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        KUBECONFIG    = '/home/yasir/.kube/config'
+        MINIKUBE_HOME = '/home/yasir'
+    }
+
     stages {
         stage('Prepare & Deploy Blue') {
             steps {
