@@ -150,6 +150,9 @@ function App() {
             }}>
               {backendData.status.includes('Healthy') ? '200 OK' : '500 ERROR'}
             </span>
+            <h1>
+              Hello from blue 
+            </h1>
           </div>
         </div>
 
