@@ -1,8 +1,0 @@
-node_modules/
-frontend/dist/
-backend/tasks-api
-terraform/.terraform/
-terraform/*.tfstate*
-terraform/*.tfvars
-.vscode/
-.idea/

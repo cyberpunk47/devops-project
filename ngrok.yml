@@ -1,0 +1,6 @@
+version: "2"
+authtoken: 
+tunnels:
+  jenkins:
+    proto: http
+    addr: 8080

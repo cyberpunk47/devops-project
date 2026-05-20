@@ -1,2 +1,24 @@
-.idea
-.claude
+# IDE
+.idea/
+.claude/
+.vscode/
+*.swp
+
+# Node
+node_modules/
+frontend/dist/
+backend/node_modules/
+manager/node_modules/
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

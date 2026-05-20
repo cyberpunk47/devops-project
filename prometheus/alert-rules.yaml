@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: rollback-alert
+  namespace: monitoring
+  labels:
+    role: alert-rules
+    release: monitoring
+spec:
+  groups:
+  - name: blue-green
+    rules:
+    - alert: GreenUnhealthy
+      expr: rate(http_requests_total{status=~"5.."}[1m]) > 0.05
+      for: 30s
+      labels:
+        severity: critical
+      annotations:
+        summary: "Green environment is broken - rollback triggered"
+        description: "DevOps Project Green frontend/backend returned an HTTP 5xx error rate greater than 5% for over 30s."

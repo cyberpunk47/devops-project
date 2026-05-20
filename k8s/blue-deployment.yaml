@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-frontend
+  namespace: blue-green-demo
+  labels:
+    app: frontend
+    version: blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: frontend
+        version: blue
+    spec:
+      containers:
+      - name: frontend
+        image: devops-proj/frontend:blue
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-backend
+  namespace: blue-green-demo
+  labels:
+    app: backend
+    version: blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: backend
+        version: blue
+    spec:
+      containers:
+      - name: backend
+        image: devops-proj/backend:blue
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: VERSION
+          value: "blue"
+        ports:
+        - containerPort: 5000
