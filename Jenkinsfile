@@ -106,8 +106,18 @@ pipeline {
     }
 
     post {
+        failure {
+            echo "Pipeline failed! Rolling back traffic to stable Blue..."
+            sh '''
+                kubectl patch svc frontend-service -n blue-green-demo \
+                  -p '{"spec":{"selector":{"version":"blue"}}}' || true
+                kubectl patch svc backend-service -n blue-green-demo \
+                  -p '{"spec":{"selector":{"version":"blue"}}}' || true
+            '''
+            echo "Rollback completed. Systems restored to Blue."
+        }
         always {
-            echo "Pipeline finished. Check Prometheus and Grafana dashboards for metrics."
+            echo "Pipeline finished."
         }
     }
 }
