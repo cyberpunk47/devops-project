@@ -28,7 +28,7 @@ function App() {
         </h1>
         <p style={{ color: '#a7f3d0' }}>
           This page should never actually load or stay in production!
-        {/* </p> */}
+        </p>
       </div>
     </div>
   )
