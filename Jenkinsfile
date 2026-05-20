@@ -1,8 +1,7 @@
 pipeline {
     agent any
-
     environment {
-        KUBECONFIG    = '/home/yasir/.kube/config'
+        KUBECONFIG    = credentials('kubeconfig') 
         MINIKUBE_HOME = '/home/yasir'
     }
 
