@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.get('/api/health', (req, res) => {
-  return res.json({ status: 'ok', version: VERSION });
+  return res.status(500).json({ status: 'error', version: VERSION });
 });
 
 app.get('/api/version', (req, res) => {
