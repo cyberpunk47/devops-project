@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        KUBECONFIG    = credentials('kubeconfig') 
-        MINIKUBE_HOME = '/home/yasir'
+        KUBECONFIG    = '/var/lib/jenkins/.kube/config'
+        MINIKUBE_HOME = '/var/lib/jenkins'
     }
 
     stages {
