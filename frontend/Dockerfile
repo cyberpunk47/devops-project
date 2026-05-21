@@ -6,6 +6,7 @@ COPY . .
 
 # Build argument to choose which version to package
 ARG VERSION=blue
+
 RUN if [ "$VERSION" = "green" ]; then cp src-green/App.jsx src/App.jsx; fi
 
 RUN npm run build

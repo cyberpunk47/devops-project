@@ -12,7 +12,7 @@ provider "kubernetes" {
   config_path = var.kube_config_path
 }
 
-# Declarative creation of the blue-green-demo namespace on Minikube
+# Namespace creation for blue green dev
 resource "kubernetes_namespace" "demo" {
   metadata {
     name = var.project_namespace
@@ -25,5 +25,5 @@ resource "kubernetes_namespace" "demo" {
 
 output "namespace_name" {
   value       = kubernetes_namespace.demo.metadata[0].name
-  description = "The name of the created Kubernetes namespace"
+  description = "Namepsace description"
 }
