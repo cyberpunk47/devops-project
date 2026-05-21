@@ -27,7 +27,7 @@ function App() {
           🟢 GREEN VERSION
         </h1>
         <p style={{ color: '#a7f3d0' }}>
-          This is the green Version or v2 any changes or errors in this version will automatically roll back to the blue version
+          {/* This is the green Version or v2 any changes or errors in this version will automatically roll back to the blue version */}
         {/* </p> */}
       </div>
     </div>
