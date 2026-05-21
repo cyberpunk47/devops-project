@@ -27,13 +27,14 @@ function App() {
 
   return (
     <div>
-      <h1>🔵 BLUE VERSION</h1>
+      <h1>BLUE VERSION</h1>
       <p>This is the Blue version and it is working!</p>
       <div>
         <p>Deploy Name: devops-proj-blue</p>
         <p>Backend: {backendData.version}</p>
         <p>Status Code: {backendData.status.includes('Healthy') ? '200 OK' : '500 ERROR'}</p>
       </div>
+      <h2>Hello new changes made check it </h2>
       <p>Powered by Express &amp; Vite • zero-downtime routing active</p>
     </div>
   )
