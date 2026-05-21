@@ -1,6 +1,3 @@
-#!/bin/bash
-# Quick manual deploy script for Blue frontend
-# Usage: ./scripts/deploy-blue.sh
 
 eval $(minikube docker-env)
 
