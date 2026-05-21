@@ -80,3 +80,4 @@ app.get('/api/health', (req, res) => {
 });
 ```
 * **Git push**: Trigger the pipeline. Jenkins validates the hotfix, and traffic successfully stays on **Green**.
+
