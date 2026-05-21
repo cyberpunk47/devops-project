@@ -26,7 +26,7 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <div style={{background:"blue"}}>
       <h1>BLUE VERSION</h1>
       <p>This is the Blue version and it is working!</p>
       <div>

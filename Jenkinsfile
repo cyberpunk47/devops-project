@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    triggers {
+        githubPush()  
+    }
     environment {
         KUBECONFIG    = '/var/lib/jenkins/.kube/config'
         MINIKUBE_HOME = '/var/lib/jenkins'
