@@ -37,34 +37,28 @@ pipeline {
 
         stage('Build Green') {
             steps {
-                sh '''                    
-                    eval $(minikube docker-env)
-                    
-                    echo "Building Green Images"
-                    docker build --build-arg VERSION=green -t devops-proj/frontend:green ./frontend
-                    docker build --build-arg VERSION=green -t devops-proj/backend:green ./backend
-                '''stage('Build Green') {
-    steps {
-        script {
-            try {
-                sh '''
-                    eval $(minikube docker-env)
-                    docker build --build-arg VERSION=green -t devops-proj/frontend:green ./frontend
-                    docker build --build-arg VERSION=green -t devops-proj/backend:green ./backend
-                '''
-            } catch (err) {
-                echo "Green build FAILED: ${err}"
-                env.ROLLBACK = 'true'
-                currentBuild.result = 'UNSTABLE' // means this satge got failed but didnot stopped the whole pipeline 
-            }
-        }
-    }
-}
-
+                script {
+                    try {
+                        sh '''
+                            eval $(minikube docker-env)
+                            
+                            echo "Building Green Images"
+                            docker build --build-arg VERSION=green -t devops-proj/frontend:green ./frontend
+                            docker build --build-arg VERSION=green -t devops-proj/backend:green ./backend
+                        '''
+                    } catch (err) {
+                        echo "Green build FAILED: ${err}"
+                        env.ROLLBACK = 'true'
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
             }
         }
 
         stage('Deploy Green') {
+            when {
+                expression { env.ROLLBACK != 'true' }
+            }
             steps {
                 sh '''
                     kubectl apply -f k8s/green-deployment.yaml
@@ -78,6 +72,9 @@ pipeline {
         }
 
         stage('Health Check') {
+            when {
+                expression { env.ROLLBACK != 'true' }
+            }
             steps {
                 script {
                     echo "Waiting for green to start"
