@@ -11,7 +11,10 @@ spec:
   - name: blue-green
     rules:
     - alert: GreenUnhealthy
-      expr: rate(http_requests_total{status=~"5.."}[1m]) > 0.05
+      expr: | 
+        (sum(rate(container_network_receive_bytes_total{namespace="blue-green-demo",pod=~"blue-green-backend-.*"}[1m]))
+        + 
+        sum(rate(container_network_receive_bytes_total{namespace="blue-green-demo",pod=~"blue-green-frontend-.*"}[1m])))
       for: 30s
       labels:
         severity: critical

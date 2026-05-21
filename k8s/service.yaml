@@ -27,6 +27,7 @@ spec:
     app: backend
     version: blue        # Switch here during blue-green deployment
   ports:
-  - port: 5000
+  - name: http
+    port: 5000
     targetPort: 5000
   type: ClusterIP
