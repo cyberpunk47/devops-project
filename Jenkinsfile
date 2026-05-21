@@ -43,7 +43,24 @@ pipeline {
                     echo "Building Green Images"
                     docker build --build-arg VERSION=green -t devops-proj/frontend:green ./frontend
                     docker build --build-arg VERSION=green -t devops-proj/backend:green ./backend
+                '''stage('Build Green') {
+    steps {
+        script {
+            try {
+                sh '''
+                    eval $(minikube docker-env)
+                    docker build --build-arg VERSION=green -t devops-proj/frontend:green ./frontend
+                    docker build --build-arg VERSION=green -t devops-proj/backend:green ./backend
                 '''
+            } catch (err) {
+                echo "Green build FAILED: ${err}"
+                env.ROLLBACK = 'true'
+                currentBuild.result = 'UNSTABLE' // means this satge got failed but didnot stopped the whole pipeline 
+            }
+        }
+    }
+}
+
             }
         }
 
