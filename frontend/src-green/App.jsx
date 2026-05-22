@@ -24,11 +24,12 @@ function App() {
         boxShadow: '0 20px 40px -15px rgba(0, 0, 0, 0.7)'
       }}>
         <h1 style={{ color: '#22c55e', fontSize: '2.5rem', fontWeight: 800 }}>
-          🟢 GREEN VERSION
+          GREEN VERSION
         </h1>
         <p style={{ color: '#a7f3d0' }}>
           {/* This is the green Version or v2 any changes or errors in this version will automatically roll back to the blue version */}
-        {/* </p> */}
+        </p>
+        <h3>This is the green version live </h3>
       </div>
     </div>
   )

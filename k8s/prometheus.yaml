@@ -15,10 +15,10 @@ data:
 
     scrape_configs:
       - job_name: 'backend'
-        dns_sd_configs:
-          - names: ['backend-service.blue-green-demo.svc.cluster.local']
-            type: A
-            port: 5000
+        static_configs:
+          - targets: ['backend-service.blue-green-demo.svc.cluster.local:5000']
+            labels:
+              app: devops-backend
 ---
 apiVersion: apps/v1
 kind: Deployment
