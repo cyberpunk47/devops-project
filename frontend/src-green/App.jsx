@@ -30,8 +30,8 @@ function App() {
           {/* This is the green Version or v2 any changes or errors in this version will automatically roll back to the blue version */}
         </p>
         <h3>This is the green version live</h3>
-        <h2>Hello new changes made check it </h2>
-        <h2>New changes made checking everything again</h2>
+        <h2>Hello new changes made check it
+        {/* <h2>New changes made checking everything again</h2> */}
       </div>
     </div>
   )
