@@ -37,13 +37,20 @@ pipeline {
 
         stage('Build Green') {
             steps {
-                sh '''
-                    eval $(minikube docker-env)
-                    
-                    echo "Building Green Images"
-                    docker build --build-arg VERSION=green -t devops-proj/frontend:green ./frontend
-                    docker build --build-arg VERSION=green -t devops-proj/backend:green ./backend
-                '''
+                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                    sh '''
+                        eval $(minikube docker-env)
+                        
+                        echo "Building Green Images"
+                        docker build --build-arg VERSION=green -t devops-proj/frontend:green ./frontend
+                        docker build --build-arg VERSION=green -t devops-proj/backend:green ./backend
+                    '''
+                }
+                script {
+                    if (currentBuild.result == 'FAILURE') {
+                        env.ROLLBACK = 'true'
+                    }
+                }
             }
         }
 
