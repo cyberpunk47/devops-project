@@ -31,7 +31,7 @@ function App() {
         </p>
         <h3>This is the green version live</h3>
         <h2>Hello new changes made check it </h2>
-        <h2>New changes made checking everything again</h2>
+        <h2>New changes made checking everything again
       </div>
     </div>
   )
