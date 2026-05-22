@@ -109,8 +109,9 @@ pipeline {
                       -p '{"spec":{"selector":{"version":"blue"}}}'
                     kubectl patch svc backend-service -n blue-green-demo \
                       -p '{"spec":{"selector":{"version":"blue"}}}'
+                    kubectl delete deployment green-frontend green-backend -n blue-green-demo --ignore-not-found=true
                 '''
-                echo "Rollback completed successfully. Systems restored to Blue."
+                echo "Rollback completed. Green pods removed. Traffic on Blue."
             }
         }
     }
