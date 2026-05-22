@@ -71,12 +71,9 @@ pipeline {
         }
 
         stage('Health Check') {
-            when {
-                expression { env.ROLLBACK != 'true' }
-            }
             steps {
                 script {
-                    echo "Waiting for green to start"
+                    echo "Waiting for services to stabilize"
                     sleep(12)
                     
                     def MINIKUBE_IP = sh(
@@ -89,13 +86,13 @@ pipeline {
                         returnStdout: true
                     ).trim()
 
-                    echo "Green Deployment Health Check returned HTTP Status Code: ${STATUS}"
+                    echo "Health Check returned HTTP Status Code: ${STATUS}"
 
                     if (STATUS != '200') {
-                        echo "200 req not found (HTTP ${STATUS})! Triggering rollback..."
+                        echo "Health check FAILED (HTTP ${STATUS})! Triggering rollback..."
                         env.ROLLBACK = 'true'
                     } else {
-                        echo "Health check passed! Green version is stable."
+                        echo "Health check passed! Application is responding."
                     }
                 }
             }
